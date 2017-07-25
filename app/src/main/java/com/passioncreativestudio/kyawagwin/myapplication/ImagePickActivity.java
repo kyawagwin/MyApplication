@@ -34,12 +34,12 @@ public class ImagePickActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        Intent pickImageIntent = new Intent();
+        pickImageIntent.setType("image/*");
+        pickImageIntent.setAction(Intent.ACTION_GET_CONTENT);
+        pickImageIntent.addCategory(Intent.CATEGORY_OPENABLE);
 
-        startActivityForResult(intent, IMAGE_PICK_REQUEST_CODE);
+        startActivityForResult(pickImageIntent, IMAGE_PICK_REQUEST_CODE);
     }
 
     @Override
