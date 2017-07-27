@@ -2,6 +2,7 @@ package com.passioncreativestudio.kyawagwin.myapplication;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -48,13 +49,8 @@ public class TakeImageActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(REQUEST_IMAGE_CAPTURE == requestCode && resultCode == RESULT_OK) {
-            //Bundle extra = data.getExtras();
-
-            //Bitmap imageBitmap = (Bitmap) extra.get("data");
-
-            //mImageView.setImageBitmap(imageBitmap);
-
             galleryAddPic();
+            setImage();
         }
     }
 
@@ -100,4 +96,26 @@ public class TakeImageActivity extends AppCompatActivity implements View.OnClick
         this.sendBroadcast(mediaScanIntent);
     }
 
+    private void setImage() {
+        // Get the dimensions of the View
+        int targetW = mImageView.getWidth();
+        int targetH = mImageView.getHeight();
+
+        // Get the dimensions of the bitmap
+        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        bmOptions.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
+        int photoW = bmOptions.outWidth;
+        int photoH = bmOptions.outHeight;
+
+        // Determine how much to scale down the image
+        int scaleFactor = Math.min(photoW/targetW, photoH/targetH);
+
+        // Decode the image file into a Bitmap sized to fill the View
+        bmOptions.inJustDecodeBounds = false;
+        bmOptions.inSampleSize = scaleFactor;
+
+        Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
+        mImageView.setImageBitmap(bitmap);
+    }
 }
