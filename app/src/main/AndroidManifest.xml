@@ -49,6 +49,7 @@
         <activity android:name=".LoginActivity" android:label="@string/title_activity_login" />
         <activity android:name=".ImagePickActivity" android:label="Pick Image" />
         <activity android:name=".TakeImageActivity" android:label="Take Image" />
+        <activity android:name=".GeocodingActivity" android:label="Geocoding" />
         
         <provider
             android:authorities="com.passioncreativestudio.kyawagwin.myapplication.fileprovider"

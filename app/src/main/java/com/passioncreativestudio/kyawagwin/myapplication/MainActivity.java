@@ -33,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.activity_main_takeImageButton:
                 intent = new Intent(context, TakeImageActivity.class);
                 break;
+            case R.id.activity_main_geocodingButton:
+                intent = new Intent(context, GeocodingActivity.class);
+                break;
         }
 
         startActivity(intent);
